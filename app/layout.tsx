@@ -1,8 +1,20 @@
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
+import localFont from "next/font/local";
+import ThemeProvider from "@/components/theme-provider";
+import { Toaster } from "sonner";
 
-const inter = Inter({ subsets: ["latin"] });
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+
+const fontHeading = localFont({
+  src: "../assets/fonts/CalSans-SemiBold.woff2",
+  variable: "--font-heading",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +28,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans",
+          fontHeading.variable,
+          fontSans.variable
+        )}
+      >
+        <ThemeProvider
+          attribute="class"
+          enableSystem={true}
+          defaultTheme="system"
+        >
+          {children}
+          <Toaster richColors />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

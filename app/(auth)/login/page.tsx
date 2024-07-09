@@ -1,5 +1,7 @@
 import { Icons } from "@/components/icons";
+import { buttonVariants } from "@/components/ui/button";
 import UserAuthForm from "@/components/user-auth-form";
+import { cn } from "@/lib/utils";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -13,7 +15,12 @@ const LoginPage = () => {
     <div className="container h-screen w-screen flex items-center justify-center">
       <Link
         href="/"
-        className="flex items-center absolute left-4 top-4 md:left-8 md:top-8 gap-2"
+        className={cn(
+          buttonVariants({
+            variant: "ghost",
+          }),
+          "flex items-center absolute left-0 top-4 md:left-8 md:top-8 gap-2 pl-2"
+        )}
       >
         <Icons.chevronLeft className="h-4 w-4" />
         Back
